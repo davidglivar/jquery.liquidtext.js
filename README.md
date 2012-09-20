@@ -74,3 +74,5 @@ Example
     </html>
 
 **result**
+
+![screen-grab](https://raw.github.com/davidglivar/jquery.liquidtext.js/master/screen-grab.png)
