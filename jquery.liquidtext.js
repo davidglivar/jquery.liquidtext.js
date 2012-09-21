@@ -1,15 +1,10 @@
 (function ($) {
   var methods = {
-    init: function (options) {
+    init: function () {
       return this.each(function () {
-        var _this = this,
-            original = measure(_this);
-        $(_this).css({
-          position: "absolute",
-          height: "auto",
-          width: "auto"
-        });
-        draw(_this, original);
+        var original = measure(this);
+        $(this).css({ position: "absolute", height: "auto", width: "auto" });
+        draw(this, original);
       });
     }
   };
@@ -22,11 +17,13 @@
   }
 
   var draw = function (that, original) {
-    var normalizedW, liquidSize, endW;
-    normalizedW = that.clientWidth;
-    liquidSize  = (original.fs / normalizedW) * original.w;
+    var normalizedW = that.clientWidth,
+        liquidSize  = (original.fs / normalizedW) * original.w,
+        endW;
+
     $(that).css("font-size", liquidSize);
     endW = that.clientWidth;
+
     if (endW < original.w - 5) {
       original.fs = liquidSize;
       draw(that, original);
@@ -36,6 +33,7 @@
       draw(that, original);
     } else {
       $(that).css("position", "relative");
+      $(that).addClass("drawn");
     }
   };
 
