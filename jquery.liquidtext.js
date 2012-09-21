@@ -1,10 +1,11 @@
 (function ($) {
   var methods = {
-    init: function () {
+    init: function (opts, callback) {
       return this.each(function () {
         var original = measure(this);
         $(this).css({ position: "absolute", height: "auto", width: "auto" });
         draw(this, original);
+        if (typeof callback === "function") { callback(); }
       });
     }
   };
@@ -32,8 +33,10 @@
       original.w -= 1;
       draw(that, original);
     } else {
+      if ($(that).hasClass("drawn")) { return; }
       $(that).css("position", "relative");
       $(that).addClass("drawn");
+      $(that).data("complete", true);
     }
   };
 
